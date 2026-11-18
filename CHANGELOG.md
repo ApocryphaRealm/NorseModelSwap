@@ -6,3 +6,6 @@
 - Console mdl.list, mdl.apply, mdl.reload.
 ### Fixed
 - A crash on the second map load: swap targets freed at the map change are checked with Alive() and loaded again.
+
+### Changed (2026-11-18, refinement)
+- Writes into game data are recorded and re-imported at each map load when their assets are no longer loaded (NorseReflect RecordWrite/RecheckWrites) - a safety net; the freeing it guards against was seen once and did not repeat in testing.
