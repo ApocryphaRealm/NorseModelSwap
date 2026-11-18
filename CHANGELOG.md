@@ -1,0 +1,8 @@
+# Changelog
+
+## 0.1.0 - 2026-11-18 (tested in game: TEST-RESULT-0.1.0.txt)
+### Added
+- Swap = old -> new for meshes and materials: in item data (rules with no When/Chance) and on spawned actors (When, Actors, Chance).
+- Console mdl.list, mdl.apply, mdl.reload.
+### Fixed
+- A crash on the second map load: swap targets freed at the map change are checked with Alive() and loaded again.
