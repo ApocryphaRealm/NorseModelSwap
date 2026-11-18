@@ -70,6 +70,7 @@ namespace
     using NcEvalFn = int (*)(int, void*, void*);
     NcCompileFn g_ncCompile = nullptr;
     NcEvalFn g_ncEval = nullptr;
+    bool g_mapUp = false; // set at the first map load; conditions are compiled from then on
 
     template <typename F>
     F ModExport(const wchar_t* mod, const char* name)
@@ -152,7 +153,7 @@ namespace
             if (r.actors.Empty()) r.actors.inc.push_back(L"bp_metahuman_unit_c");
             pairs += r.swaps.size();
         }
-        CompileConditions();
+        if (g_mapUp) CompileConditions(); // not at start-up: NorseConditions may not have registered its conditions yet (NorseAnimSwap 0.1.0)
         NRN_INFO("model rules: %zu rule(s), %zu swap(s) from %zu file(s)", g_rules.size(), pairs, files.size());
     }
 
@@ -551,6 +552,7 @@ class NorseModelSwap : public RC::CppUserModBase
         try
         {
             RC::Unreal::Hook::RegisterInitGameStatePostCallback([](RC::Unreal::AGameModeBase*) {
+                g_mapUp = true;
                 g_pending.clear();
                 CompileConditions();
                 try
