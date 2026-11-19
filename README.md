@@ -27,3 +27,7 @@ Console: `mdl.list [class]` (meshes and materials on the first actors: where to 
 tested rules: `docs\examples\test-models.ini`.
 
 0.1.0 tested in game. Not yet: weapon actors, `Chance`.
+
+## Licence
+
+GPL-3.0-or-later (see LICENSE).
